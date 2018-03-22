@@ -20,12 +20,13 @@ AC_C_BIGENDIAN
 dnl Check for some target-specific stuff
 case "$host" in
 *-*-freebsd*)
-  CPPFLAGS="$CPPFLAGS -I/usr/local/include -I/usr/src/contrib/file/"
-  LDFLAGS="$LDFLAGS -L/usr/local/lib -Wl,-rpath,/usr/local/lib"
+  #CPPFLAGS="$CPPFLAGS -I/usr/local/include -I/usr/src/contrib/file/"
+  #LDFLAGS="$LDFLAGS -L/usr/local/lib -Wl,-rpath,/usr/local/lib"
   ;;
 *-*-linux*)
-  CPPFLAGS="$CPPFLAGS -D _GNU_SOURCE -I/usr/local/include"
-  LDFLAGS="$LDFLAGS -L/usr/local/lib -Wl,-rpath,/usr/local/lib"
+  #CPPFLAGS="$CPPFLAGS -D _GNU_SOURCE -I/usr/local/include"
+  CPPFLAGS="$CPPFLAGS -D _GNU_SOURCE"
+  #LDFLAGS="$LDFLAGS -L/usr/local/lib -Wl,-rpath,/usr/local/lib"
   ;;
 *-*-darwin*)
   CPPFLAGS="$CPPFLAGS -I/opt/local/include"
@@ -170,6 +171,7 @@ AC_ARG_WITH(cargos-lib,
 
 if test x$enable_cargos = "xyes" ; then
 	OLD_CPPFLAGS=${CPPFLAGS};
+	OLD_LDFLAGS=${LDFLAGS}
 	if test x$cargos_inc != "xno"; then
 		CPPFLAGS="${CPPFLAGS} -I${cargos_inc}"
 	fi
@@ -177,7 +179,6 @@ if test x$enable_cargos = "xyes" ; then
 	AC_CHECK_HEADER(cargos-lib.h,[enable_cargos=yes],[enable_cargos=no])
 	
 	if test x$enable_cargos = "xyes" ; then
-		OLD_LDFLAGS=${LDFLAGS}
 		if test x$cargos_lib != "xno"; then
 			LDFLAGS="${LDFLAGS}  -L${cargos_lib}"
 		fi
