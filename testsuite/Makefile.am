@@ -18,6 +18,7 @@ instrtest_SOURCES = instrtest.c
 
 #instrtree_LDADD = ../src/libemu.la
 instrtree_SOURCES = instrtree.c
+instrtree_LDADD = -ldasm
 
 hashtest_LDADD = ../src/libemu.la
 hashtest_SOURCES = hashtest.c

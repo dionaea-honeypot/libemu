@@ -432,7 +432,7 @@ void debug_instruction(struct emu_instruction *ei)
 
 #undef PREFIX_LOCK
 
-#include "libdasm.h"
+#include <libdasm.h>
 uint32_t dasm_print_instruction(uint32_t eip, uint8_t *data, uint32_t size, char *str)
 {
 	INSTRUCTION inst;

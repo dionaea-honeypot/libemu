@@ -78,7 +78,7 @@ libemu_la_SOURCES += functions/test.c
 libemu_la_SOURCES += functions/xchg.c
 libemu_la_SOURCES += functions/xor.c
 
-libemu_la_SOURCES += libdasm.c libdasm.h opcode_tables.h
+#libemu_la_SOURCES += libdasm.c libdasm.h opcode_tables.h
 
 libemu_la_SOURCES += environment/emu_env.c
 libemu_la_SOURCES += environment/emu_profile.c
@@ -96,4 +96,4 @@ libemu_la_SOURCES += environment/linux/emu_env_linux.c
 libemu_la_SOURCES += environment/linux/env_linux_syscall_hooks.c
 
 
-libemu_la_LDFLAGS = -no-undefined -version-info @libemu_soname@ -export-symbols-regex "^emu_"
+libemu_la_LDFLAGS = -no-undefined -version-info @libemu_soname@ -export-symbols-regex "^emu_" -ldasm
