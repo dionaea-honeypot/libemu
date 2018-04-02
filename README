@@ -26,8 +26,19 @@ building from tarball:
 
 specific configure options:
 
---enable-debug          enable debug code generation [default=yes]
+--enable-debug           enable debug code generation [default=yes]
 	debug messages, instruction strings, nothing one wants to miss, even if it takes a lot of cpu cycles.
 
+--enable-python-bindings enable build of the python bindings
+
+
+Dependencies:
+libdasm	https://github.com/jtpereyda/libdasm/
+	wget https://github.com/jtpereyda/libdasm/archive/v1.6.tar.gz -O libdasm-1.6.tar.gz
+	tar xzvf libdasm-1.6.tar.gz
+	cd libdasm-1.6
+	autoreconf -v -i
+        make CFLAGS="$CFLAGS -fPIC" PREFIX=/opt/libdasm
+        make
 
 

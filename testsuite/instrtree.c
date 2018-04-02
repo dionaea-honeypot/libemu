@@ -28,9 +28,9 @@
 
 
 #include <stdint.h>
+#include <stdio.h>
 
-#include "../src/libdasm.c"
-#include "../src/libdasm.h"
+#include <libdasm.h>
 /* JMPCall 
 const char scode[] = "\xfc\xbb\xbf\x05\xeb\xd0\xeb\x0c\x5e\x56\x31\x1e\xad\x01\xc3"
 "\x85\xc0\x75\xf7\xc3\xe8\xef\xff\xff\xff\x43\x6f\x00\x97\x53";
