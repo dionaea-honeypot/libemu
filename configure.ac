@@ -10,7 +10,7 @@ AC_REVISION([$Id$])
 
 AC_PREFIX_DEFAULT(/opt/libemu)
 AC_CONFIG_SRCDIR([include/emu/emu.h])
-AM_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
 # AM_MAINTAINER_MODE
 
 AC_CANONICAL_HOST
@@ -39,7 +39,8 @@ esac
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_MAKE_SET
-AC_PROG_LIBTOOL
+#AC_PROG_LIBTOOL
+LT_INIT
 
 AC_CHECK_HEADERS([stdint.h stdlib.h string.h strings.h unistd.h])
 
@@ -63,7 +64,16 @@ AC_C_INLINE
 AC_TYPE_UID_T
 AC_STRUCT_TM
 AC_TYPE_SIZE_T
-AC_TYPE_SIGNAL
+AC_CACHE_CHECK([return type of signal handlers],[ac_cv_type_signal],[AC_COMPILE_IFELSE(
+[AC_LANG_PROGRAM([#include <sys/types.h>
+#include <signal.h>
+],
+		 [return *(signal (0, 0)) (0) == 1;])],
+		   [ac_cv_type_signal=int],
+		   [ac_cv_type_signal=void])])
+AC_DEFINE_UNQUOTED([RETSIGTYPE],[$ac_cv_type_signal],[Define as the return type of signal handlers
+		    (`int' or `void').])
+
 
 
 AC_CHECK_SIZEOF(long)
@@ -71,7 +81,16 @@ AC_CHECK_SIZEOF(off_t)
 
 # Checks for library functions.
 AC_FUNC_ERROR_AT_LINE
-AC_TYPE_SIGNAL
+AC_CACHE_CHECK([return type of signal handlers],[ac_cv_type_signal],[AC_COMPILE_IFELSE(
+[AC_LANG_PROGRAM([#include <sys/types.h>
+#include <signal.h>
+],
+		 [return *(signal (0, 0)) (0) == 1;])],
+		   [ac_cv_type_signal=int],
+		   [ac_cv_type_signal=void])])
+AC_DEFINE_UNQUOTED([RETSIGTYPE],[$ac_cv_type_signal],[Define as the return type of signal handlers
+		    (`int' or `void').])
+
 AC_CHECK_FUNCS([strndup inet_ntoa  memmove memset strdup strerror])
 
 # library soname
@@ -90,7 +109,7 @@ dnl **************************************************
 
 AC_MSG_CHECKING(for Large File System support)
 AC_ARG_ENABLE(lfs,
- AC_HELP_STRING([--enable-lfs],[Turn on Large File System (default)]),
+ AS_HELP_STRING([--enable-lfs],[Turn on Large File System (default)]),
  [case "$host" in
  *-*-linux*)
  case "${enableval}" in
