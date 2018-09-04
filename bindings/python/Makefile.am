@@ -1,15 +1,16 @@
 # $Id$
 
 AUTOMAKE_OPTIONS = foreign
+PYTHON = python
 
 all:
-	python setup.py build
+	$(PYTHON) setup.py build
 
 install: all
-	python setup.py install
+	$(PYTHON) setup.py install --prefix=$(DESTDIR)$(prefix)
 
 clean:
-	python setup.py clean
+	$(PYTHON) setup.py clean
 
 dist-clean: clean
 
